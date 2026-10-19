@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalbimden Sana ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ff1493, #db7093);
+      background-size: 400% 400%;
+      animation: gradientBG 8s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .top-header { text-align: center; margin-bottom: 20px; z-index: 10; }
+    .top-header .big-heart { font-size: 3.5rem; animation: pulse 1.2s infinite; display: inline-block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.8)); }
+    .top-header h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: #ffffff; text-shadow: 2px 2px 8px rgba(139, 0, 139, 0.4); }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(214, 51, 132, 0.3);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      z-index: 10;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .question { font-size: 1.25rem; font-weight: 600; color: #d63384; margin-bottom: 25px; line-height: 1.4; }
+    .btn-container { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; position: relative; min-height: 70px; }
+    button {
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    .btn-yes { background: linear-gradient(45deg, #ff1493, #ff69b4); color: white; z-index: 2; }
+    .btn-yes:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255, 20, 147, 0.5); }
+    .btn-no { background-color: #fff0f5; color: #d63384; border: 1px solid #ffb6c1; position: relative; z-index: 1; }
+    .hidden { display: none !important; }
+    .result-title { font-size: 1.3rem; font-weight: 600; color: #ff1493; margin-bottom: 15px; }
+    .love-note { font-size: 1.05rem; color: #8b008b; line-height: 1.7; font-weight: 500; text-align: left; background: rgba(255, 240, 245, 0.95); padding: 20px; border-radius: 16px; border-left: 5px solid #ff1493; box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.1); }
+    .heart-particle { position: absolute; pointer-events: none; animation: floatUp 4s linear forwards; font-size: 1.5rem; opacity: 0.9; z-index: 1; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.3); opacity: 0; } }
+  </style>
+</head>
+<body>
+
+  <div class="top-header">
+    <div class="big-heart">💖✨</div>
+    <h1>Kalbimden Sana</h1>
+  </div>
+
+  <div class="card" id="card">
+    <!-- Başlangıç Ekranı -->
+    <div id="step-start">
+      <div class="question">hey güzelim sana bir kaç sorum var 💗🌸</div>
+      <div class="btn-container">
+        <button class="btn-yes" onclick="nextStep(1)">Başlayalım ✨</button>
+      </div>
+    </div>
+
+    <!-- Soru 1 -->
+    <div id="step-1" class="hidden">
+      <div class="question">Benimle konuşmak gününü güzelleştiriyomu? 💕✨</div>
+      <div class="btn-container">
+        <button class="btn-yes" id="yes-1" onclick="nextStep(2)">Evet, çok! ❤️</button>
+        <button class="btn-no" id="no-1" onmouseover="runAway(this, 'yes-1')" onclick="runAway(this, 'yes-1')">Hayır 🙈</button>
+      </div>
+    </div>
+
+    <!-- Soru 2 -->
+    <div id="step-2" class="hidden">
+      <div class="question">Birlikte güzel anılar biriktirelimmi? 🌸💖</div>
+      <div class="btn-container">
+        <button class="btn-yes" id="yes-2" onclick="nextStep(3)">Kesinlikle 💖</button>
+        <button class="btn-no" id="no-2" onmouseover="runAway(this, 'yes-2')" onclick="runAway(this, 'yes-2')">Yok 😅</button>
+      </div>
+    </div>
+
+    <!-- Soru 3 -->
+    <div id="step-3" class="hidden">
+      <div class="question">Beni seviyormusun? 🥺❤️</div>
+      <div class="btn-container">
+        <button class="btn-yes" id="yes-3" onclick="nextStep(4)">Evet ❤️</button>
+        <button class="btn-no" id="no-3" onmouseover="runAway(this, 'yes-3')" onclick="runAway(this, 'yes-3')">Ağzını kırarım 🙈</button>
+      </div>
+    </div>
+
+    <!-- Soru 4 -->
+    <div id="step-4" class="hidden">
+      <div class="question">Sana son bir sorum var…hazırmısın?? ✨🌹</div>
+      <div class="btn-container">
+        <button class="btn-yes" id="yes-4" style="font-size: 1.2rem; padding: 15px 35px;" onclick="showFinal()">Hazırım 💗</button>
+      </div>
+    </div>
+
+    <!-- Final Mektubu -->
+    <div id="step-final" class="hidden">
+      <div class="result-title">sana söylemek istediğim şey 💌✨</div>
+      <div class="love-note">
+        seninle konuşmak, gülmek ve günümden bir şeyleri seninle paylaşmak benim için çok özel. İyiki seni tanımışım💗 seni çok seviyorum benimle çıkarmısın???🥹🥹
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function nextStep(step) {
+      document.querySelectorAll('#card > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById('step-' + step).classList.remove('hidden');
+    }
+
+    function showFinal() {
+      document.querySelectorAll('#card > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById('step-final').classList.remove('hidden');
+      for(let i=0; i<40; i++) { setTimeout(createHeart, i * 80); }
+    }
+
+    let scales = { 'yes-1': 1, 'yes-2': 1, 'yes-3': 1 };
+
+    function runAway(btn, yesId) {
+      const yesBtn = document.getElementById(yesId);
+      if (yesBtn) {
+        scales[yesId] += 0.35;
+        yesBtn.style.transform = `scale(${scales[yesId]})`;
+      }
+      const card = document.getElementById('card');
+      const maxX = card.clientWidth - btn.clientWidth - 20;
+      const maxY = card.clientHeight - btn.clientHeight - 20;
+      const x = Math.random() * maxX - (maxX / 2);
+      const y = Math.random() * maxY - (maxY / 2);
+      btn.style.position = 'relative';
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-particle');
+      heart.innerHTML = ['❤️', '💖', '💕', '💗', '💓', '🌸', '✨'][Math.floor(Math.random() * 7)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
