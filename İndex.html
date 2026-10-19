@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalbimden Sana 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+body {
+background: linear-gradient(135deg, #ff9a9e, #fecfef, #feada6);
+background-size: 400% 400%;
+animation: gradientBG 8s ease infinite;
+font-family: 'Poppins', sans-serif;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+position: relative;
+}
+@keyframes gradientBG {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+/* Üst Başlık ve Parlayan Kalp */
+.top-header {
+text-align: center;
+margin-bottom: 15px;
+z-index: 10;
+}
+.glowing-heart {
+font-size: 3.5rem;
+animation: pulse 1.5s infinite alternate;
+display: inline-block;
+filter: drop-shadow(0 0 15px #ff4757);
+}
+.header-subtitle {
+font-family: 'Sacramento', cursive;
+font-size: 2.2rem;
+color: #d63031;
+font-weight: bold;
+text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+@keyframes pulse {
+0% { transform: scale(1); filter: drop-shadow(0 0 10px #ff758c); }
+100% { transform: scale(1.25); filter: drop-shadow(0 0 25px #ff4757); }
+}
+/* Kart Kutusu */
+.container {
+background: rgba(255, 255, 255, 0.92);
+padding: 30px 25px;
+border-radius: 25px;
+box-shadow: 0 15px 35px rgba(255, 75, 110, 0.3);
+text-align: center;
+width: 90%;
+max-width: 420px;
+z-index: 10;
+position: relative;
+backdrop-filter: blur(5px);
+border: 2px solid #ffb6c1;
+}
+.question-text {
+font-size: 1.25rem;
+color: #d63031;
+margin-bottom: 25px;
+font-weight: 600;
+line-height: 1.5;
+}
+.btn-group {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 15px;
+position: relative;
+min-height: 70px;
+flex-wrap: wrap;
+}
+.btn {
+padding: 12px 28px;
+font-size: 1.1rem;
+font-weight: 700;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+}
+.btn-yes {
+background: linear-gradient(45deg, #ff4757, #ff6b81);
+color: white;
+z-index: 2;
+}
+.btn-yes:hover {
+background: linear-gradient(45deg, #ff6b81, #ff4757);
+box-shadow: 0 8px 20px rgba(255, 71, 87, 0.5);
+}
+.btn-no {
+background-color: #f1f2f6;
+color: #57606f;
+position: relative;
+z-index: 1;
+border: 1px solid #dfe4ea;
+}
+/* Uçan Kalpler */
+.heart {
+position: absolute;
+animation: flyUp 4s linear infinite;
+z-index: 1;
+pointer-events: none;
+}
+@keyframes flyUp {
+0% {
+transform: translateY(100vh) scale(0.3) rotate(0deg);
+opacity: 0;
+}
+30% {
+opacity: 0.9;
+}
+100% {
+transform: translateY(-10vh) scale(1.2) rotate(360deg);
+opacity: 0;
+}
+}
+/* Sonuç Notu Tasarımı */
+.note-box {
+background: #fff0f3;
+border: 2px dashed #ff4d6d;
+border-radius: 18px;
+padding: 20px;
+margin-top: 15px;
+color: #590d22;
+font-size: 1.05rem;
+line-height: 1.7;
+text-align: center;
+box-shadow: inset 0 0 10px rgba(255, 182, 193, 0.5);
+}
+.result-title {
+font-size: 1.4rem;
+color: #c9184a;
+font-weight: 700;
+margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<!-- Üst Başlık Alanı -->
+<div class="top-header">
+<div class="glowing-heart">💖✨</div>
+<div class="header-subtitle">Kalbimden Sana</div>
+</div>
+<!-- Ana İçerik Kutusu -->
+<div class="container" id="quiz-container">
+<div class="question-text" id="question">Hey güzelim sana bir kaç sorum var 💖🌸</div>
+<div class="btn-group" id="btn-group">
+<button class="btn btn-yes" id="yes-btn" onclick="handleNext()">Başlayalım ✨</button>
+</div>
+</div>
+<script>
+// Pembe ve Kırmızı Karışık Kalpler
+const heartEmojis = ['💖', '💗', '💓', '💕', '❤️', '🌸', '🌺'];
+function createFloatingHeart() {
+const heart = document.createElement('div');
+heart.classList.add('heart');
+heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+heart.style.left = Math.random() * 100 + 'vw';
+heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+document.body.appendChild(heart);
+setTimeout(() => { heart.remove(); }, 4000);
+}
+setInterval(createFloatingHeart, 250);
+// Sorular ve İlgili Buton Metinleri
+const steps = [
+{
+question: "1. Benimle konuşmak gününü güzelleştiriyomu? 🌸💕",
+yesText: "Evet hem de çok! 🥰",
+hasNo: true
+},
+{
+question: "2. Birlikte güzel anılar biriktirelimmi? 📸💖",
+yesText: "Kesinlikle! ✨",
+hasNo: true
+},
+{
+question: "3. Beni seviyormusun? 🥺💗",
+yesText: "Evet ❤️",
+hasNo: true
+},
+{
+question: "4. Sana son bir sorum var… hazırmısın?? 🫣💖",
+yesText: "Hazırım! 💌",
+hasNo: false
+}
+];
+let currentStep = -1; // -1: Başlangıç ekranı
+let yesButtonSize = 1;
+function handleNext() {
+currentStep++;
+if (currentStep < steps.length) {
+const stepData = steps[currentStep];
+document.getElementById('question').innerText = stepData.question;
+// Buton grubunu güncelle
+const btnGroup = document.getElementById('btn-group');
+yesButtonSize = 1; // boyutu sıfırla
+if (stepData.hasNo) {
+btnGroup.innerHTML = ⁠<button class="btn btn-yes" id="yes-btn" onclick="handleNext()">${stepData.yesText}</button> <button class="btn btn-no" id="no-btn" onmouseover="moveNo()" ontouchstart="moveNo()" onclick="moveNo()">Hayır 🙈</button>⁠;
+} else {
+btnGroup.innerHTML = ⁠<button class="btn btn-yes" id="yes-btn" onclick="showFinalScreen()">${stepData.yesText}</button>⁠;
+}
+} else {
+showFinalScreen();
+}
+}
+// Hayır butonunun kaçma ve Evet butonunun büyüme mantığı
+function moveNo() {
+const noBtn = document.getElementById('no-btn');
+const yesBtn = document.getElementById('yes-btn');
+if (!noBtn) return;
+// Rastgele kaçış pozisyonu
+const x = Math.random() * 180 - 90;
+const y = Math.random() * 120 - 60;
+noBtn.style.transform = ⁠translate(${x}px, ${y}px)⁠;
+// Olumlu cevabı büyütme
+yesButtonSize += 0.2;
+if (yesBtn) {
+yesBtn.style.transform = ⁠scale(${yesButtonSize})⁠;
+}
+}
+// Sonuç Ekranı
+function showFinalScreen() {
+const container = document.getElementById('quiz-container');
+container.innerHTML = ⁠<div class="result-title">Sana söylemek istediğim şey ✨💗</div> <div class="note-box"> "Seninle konuşmak, gülmek ve günümden bir şeyleri seninle paylaşmak benim için çok özel. İyi ki seni tanımışım 💗 seni çok seviyorum benimle çıkarmısın??? 🥹🥹" </div>⁠;
+}
+</script>
+</body>
+</html>
